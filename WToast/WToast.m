@@ -112,16 +112,18 @@
 								 attributes:@{NSFontAttributeName: textLabel.font}
 									context:nil];
 
-	frame.size.width = width;
+	frame.size.width = frame.size.width+40;
 	frame.size.height = MAX(frame.size.height + 20.0, 38.0);
 
 	WToast *toast = [[WToast alloc] initWithFrame:frame];
-	toast.backgroundColor = RGBA(0, 0, 0, 0.8);
+    toast.backgroundColor = RGB(137,152,160);//RGBA(0, 0, 0, 0.8);
 
 	textLabel.text = text;
 	frame.origin.x = floor((toast.frame.size.width - frame.size.width) / 2.0);
-	frame.origin.y = floor((toast.frame.size.height - frame.size.height) / 2.0);
+    frame.origin.y = floor((toast.frame.size.height - frame.size.height) / 2.0);
 	textLabel.frame = frame;
+    toast.clipsToBounds = YES;
+    toast.layer.cornerRadius = 19;
 
 	[toast addSubview:textLabel];
 
@@ -163,22 +165,22 @@
 	CGFloat x = floor((screenSize.width - self.bounds.size.width) / 2.0);
 	CGFloat y;
 	
-	switch (self.gravity) {
-		case kWTGravityTop: {
-			y = MIN([UIApplication sharedApplication].statusBarFrame.size.width, [UIApplication sharedApplication].statusBarFrame.size.height) + 15.0;
-			break;
-		}
-		case kWTGravityMiddle: {
-			y = floor((screenSize.height - self.bounds.size.height) * 0.5);
-			break;
-		}
-		case kWTGravityBottom:
-		default: {
-			y = screenSize.height - self.bounds.size.height - 15.0 - TABBAR_OFFSET;
-			break;
-		}
-	}
-
+//	switch (self.gravity) {
+//		case kWTGravityTop: {
+//			y = MIN([UIApplication sharedApplication].statusBarFrame.size.width, [UIApplication sharedApplication].statusBarFrame.size.height) + 15.0;
+//			break;
+//		}
+//		case kWTGravityMiddle: {
+//			y = floor((screenSize.height - self.bounds.size.height) * 0.5);
+//			break;
+//		}
+//		case kWTGravityBottom:
+//		default: {
+//			y = screenSize.height - self.bounds.size.height - 15.0 - TABBAR_OFFSET;
+//			break;
+//		}
+//	}
+    y = 72;//MIN([UIApplication sharedApplication].statusBarFrame.size.width, [UIApplication sharedApplication].statusBarFrame.size.height) + 15.0;
 	CGRect f = self.bounds;
 	f.origin = CGPointMake(x, y);
 	self.frame = f;
